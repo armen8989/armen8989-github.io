@@ -6,3 +6,12 @@
     background-color: #999;
 
 }
+
+@mixin clearfix {
+    &::after {
+        content: "";
+        display: table;
+        clear: both;
+    }
+
+}
