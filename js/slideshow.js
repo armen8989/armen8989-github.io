@@ -3,25 +3,22 @@ window.onload = function() {
     let currentIMG = 0;
     const thumbImgs = document.querySelectorAll('.slideshow .gallery img');
     const slideImgs = document.querySelectorAll('.slideshow .frame img');
-
+ 
     function startSlideShow() {
         tid = setInterval(function() {
-            //slideImgs[currentIMG].classList.remove('active');
-            //thumbImgs[currentIMG].classList.remove('selected');
-            currentIMG++;
-            if(currentIMG === slideImgs.length) {
-                currentIMG = 0;
-            }
-            //slideImgs[currentIMG].classList.add('active');
-            //thumbImgs[currentIMG].classList.add('selected');
+            showNextSlide(function() {
+                currentIMG++;
+                if(currentIMG === slideImgs.length) {
+                    currentIMG = 0;
+                }
+            });
         }, 3000);
-
     }
-
-    function stopSlideShow () {
+ 
+    function stopSlideShow() {
         clearInterval(tid);
     }
-
+ 
     function showNextSlide(setSlide) {
         slideImgs[currentIMG].classList.remove('active');
         thumbImgs[currentIMG].classList.remove('selected');
@@ -29,31 +26,27 @@ window.onload = function() {
         slideImgs[currentIMG].classList.add('active');
         thumbImgs[currentIMG].classList.add('selected');
     }
-
+ 
     slideImgs.forEach(function(el) {
-
+       
         el.addEventListener('mouseover', function() {
-            stopSlideShow ();
+            stopSlideShow();
         });
-
+ 
         el.addEventListener('mouseout', function() {
             startSlideShow();
         });
-        
     });
-
+ 
     thumbImgs.forEach(function(el, index) {
-        el.addEventListener('click', function () {
-            stopSlideShow ();
+        el.addEventListener('click', function() {
+            stopSlideShow();
             showNextSlide(function() {
                 currentIMG = index;
             });
             startSlideShow();
         });
     });
-
+ 
     startSlideShow();
-    
 }
-
-
